@@ -24,7 +24,7 @@ namespace Service
             Student    // Học sinh
         }
 
-        public async Task<string> GetSqlQueryAsync(string naturalLanguageQuery, UserRole role, string currentUserId = null)
+        public async Task<string> GetSqlQueryAsync(string naturalLanguageQuery)
         {
             // Schema cơ sở dữ liệu
             string schema = @"
