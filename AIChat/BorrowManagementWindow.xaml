@@ -1,0 +1,73 @@
+﻿<Window x:Class="LibraryManageProgram.BorrowManagementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LibraryManageProgram"
+        mc:Ignorable="d"
+        Title="BorrowManagementWindow" Height="450" Width="800">
+    <Grid Margin="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <TextBox x:Name="txtStudentId" Width="120"/>
+            <Button Content="Search" Margin="5 0" Click="Search_Click"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Borrow list -->
+            <DataGrid ItemsSource="{Binding Borrows}"
+                      SelectedItem="{Binding SelectedBorrow}"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="BorrowId" Binding="{Binding BorrowId}" Width="80"/>
+                    <DataGridTextColumn Header="Date" Binding="{Binding BorrowDate}"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Detail list -->
+            <DataGrid Grid.Column="1"
+                      ItemsSource="{Binding Details}"
+                      SelectedItem="{Binding SelectedDetail}"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="DetailId" Binding="{Binding BorrowDetailId}" Width="80"/>
+                    <DataGridTextColumn Header="Instance" Binding="{Binding InstanceId}" Width="80"/>
+                    <DataGridTextColumn Header="Condition" Binding="{Binding BookInstance.Condition}" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Fine list + actions -->
+            <StackPanel Grid.Column="2">
+                <DataGrid ItemsSource="{Binding Fines}" AutoGenerateColumns="False" Height="250">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="FineId" Binding="{Binding FineId}" Width="80"/>
+                        <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="80"/>
+                        <DataGridTextColumn Header="Reason" Binding="{Binding Reason}" Width="150"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button Content="Add Fine" Margin="0 10" Click="AddFine_Click"
+                        IsEnabled="{Binding SelectedBorrow.Status, Converter={StaticResource BorrowingOnly}}"/>
+
+                <Button Content="Mark Returned" Click="MarkReturned_Click"
+                        IsEnabled="{Binding SelectedBorrow.Status, Converter={StaticResource BorrowingOnly}}"/>
+
+                <Button Content="Mark Late" Click="MarkLate_Click"
+                        IsEnabled="{Binding SelectedBorrow.Status, Converter={StaticResource BorrowingOnly}}"/>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Window>
