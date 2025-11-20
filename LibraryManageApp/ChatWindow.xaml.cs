@@ -1,23 +1,28 @@
-﻿using System;
+﻿using Service; // Đảm bảo namespace này trỏ đúng tới nơi chứa DatabaseService và GeminiClient
+using System;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Service; // Đảm bảo namespace này trỏ đúng tới nơi chứa DatabaseService và GeminiClient
 
 namespace LibraryManageApp
 {
     public partial class ChatWindow : Window
     {
         // Khởi tạo Services
-        private readonly GeminiClient geminiClient = new GeminiClient();
+        private readonly GeminiClient geminiClient;
         private readonly DatabaseService dbService = new DatabaseService();
+        private readonly int role;
+        private readonly string currentUserId;
 
-        public ChatWindow()
+        public ChatWindow(int role, string currentUserId)
         {
             InitializeComponent();
             txtInput.Focus();
+            geminiClient = new GeminiClient(role);
+            this.role = role;
+            this.currentUserId = currentUserId;
         }
 
         // Xử lý khi nhấn phím Enter
@@ -51,7 +56,7 @@ namespace LibraryManageApp
             try
             {
                 // 2. Gọi Gemini lấy SQL
-                string sqlQuery = await geminiClient.GetSqlQueryAsync(query);
+                string sqlQuery = await geminiClient.GetSqlQueryAsync(query, role, currentUserId);
 
                 // Cập nhật tin nhắn loading thành SQL (để debug/thông báo)
                 // Nếu muốn ẩn SQL, bạn có thể thay bằng text khác

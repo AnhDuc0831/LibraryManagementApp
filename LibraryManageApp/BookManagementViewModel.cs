@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryManageProgram
+namespace LibraryManageApp
 {
     public class BookManagementViewModel : INotifyPropertyChanged
     {

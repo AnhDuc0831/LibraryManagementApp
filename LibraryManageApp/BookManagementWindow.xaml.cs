@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace LibraryManageProgram
+namespace LibraryManageApp
 {
     /// <summary>
     /// Interaction logic for BookManagementWindow.xaml

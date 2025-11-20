@@ -104,5 +104,18 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <!-- Chat with AI Floating Button -->
+        <Button x:Name="btnChatAI"
+        Content="💬 Trợ lý ảo"
+        Width="120"
+        Height="45"
+        Background="#3A7AFE"
+        Foreground="White"
+        BorderThickness="0"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Bottom"
+        Margin="0,0,20,20"
+        FontSize="16"
+        Click="BtnChatAI_Click"/>
     </Grid>
 </Window>

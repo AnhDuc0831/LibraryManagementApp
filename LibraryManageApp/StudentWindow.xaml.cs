@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using Microsoft.EntityFrameworkCore;
 using DataAccsess;
 using LibraryManageApp.ViewModels;
+using BussinessObject;
 
 namespace LibraryManageApp
 {
@@ -18,11 +19,13 @@ namespace LibraryManageApp
         private int _pageSize = 10;
         private int _totalPages = 1;
         private int _totalItems = 0;
+        private readonly int currentUserId;
 
-        public StudentWindow()
+        public StudentWindow(Student student)
         {
             InitializeComponent();
             Loaded += StudentWindow_Loaded;
+            this.currentUserId = student.StudentId;
         }
 
         private void StudentWindow_Loaded(object sender, RoutedEventArgs e)
@@ -330,6 +333,12 @@ namespace LibraryManageApp
                 .ToList();
 
             dgHistory.ItemsSource = history;
+        }
+
+        private void BtnChatAI_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new ChatWindow(2, this.currentUserId.ToString());
+            win.Show();
         }
     }
 }       
