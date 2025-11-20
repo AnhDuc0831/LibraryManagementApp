@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36414.22 d17.14
+VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BussinessObject", "BussinessObject\BussinessObject.csproj", "{42379D37-5032-460E-9EB6-B2794970D5B5}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{D2098FF4-1A54-4F95-84CA-CBDDC7274762}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryManageApp", "LibraryManageApp\LibraryManageApp.csproj", "{4E5D700D-70CA-48A3-B0FE-B808F4BA247B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProgram", "TestProgram\TestProgram.csproj", "{1F1BA52D-B325-4E0A-9F84-B40FD6CC4F22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{4E5D700D-70CA-48A3-B0FE-B808F4BA247B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E5D700D-70CA-48A3-B0FE-B808F4BA247B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E5D700D-70CA-48A3-B0FE-B808F4BA247B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F1BA52D-B325-4E0A-9F84-B40FD6CC4F22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F1BA52D-B325-4E0A-9F84-B40FD6CC4F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F1BA52D-B325-4E0A-9F84-B40FD6CC4F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F1BA52D-B325-4E0A-9F84-B40FD6CC4F22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
