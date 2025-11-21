@@ -6,6 +6,10 @@
         xmlns:local="clr-namespace:LibraryManageApp"
         mc:Ignorable="d"
         Title="BorrowManagementWindow" Height="450" Width="800">
+    <Window.Resources>
+        <local:BorrowingOnlyConverter x:Key="BorrowingOnly"/>
+    </Window.Resources>
+    
     <Grid Margin="10">
 
         <Grid.RowDefinitions>

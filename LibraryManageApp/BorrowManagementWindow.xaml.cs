@@ -36,8 +36,10 @@ namespace LibraryManageApp
 
         private async void Search_Click(object sender, RoutedEventArgs e)
         {
-            if (int.TryParse(txtStudentId.Text, out int id))
-                await _vm.Search(id);
+            if (!string.IsNullOrEmpty(txtStudentId.Text.Trim()))
+            {
+                await _vm.Search(txtStudentId.Text.Trim());
+            }
         }
 
         private async void AddFine_Click(object sender, RoutedEventArgs e)
@@ -46,20 +48,20 @@ namespace LibraryManageApp
             if (input.ShowDialog() == true)
             {
                 await _vm.AddFine(input.Amount, input.Reason);
-                await _vm.Search(_vm.SelectedBorrow.StudentId);
+                await _vm.Search(_vm.SelectedBorrow.Student.Code);
             }
         }
 
         private async void MarkReturned_Click(object sender, RoutedEventArgs e)
         {
             await _vm.SetReturned("Returned");
-            await _vm.Search(_vm.SelectedBorrow.StudentId);
+            await _vm.Search(_vm.SelectedBorrow.Student.Code);
         }
 
         private async void MarkLate_Click(object sender, RoutedEventArgs e)
         {
             await _vm.SetReturned("Late");
-            await _vm.Search(_vm.SelectedBorrow.StudentId);
+            await _vm.Search(_vm.SelectedBorrow.Student.Code);
         }
     }
 

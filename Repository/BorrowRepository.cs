@@ -18,15 +18,16 @@ namespace Repository
             db = new DBLibraryManagementContext();
         }
 
-        public async Task<List<Borrow>> GetByStudentIdAsync(int studentId)
+        public async Task<List<Borrow>> GetByStudentIdAsync(string studentCode)
         {
 
             return await db.Borrows
-                .Where(x => x.StudentId == studentId)
-                .Include(x => x.BorrowDetails)
+                .Include(b => b.Student)
+                .Include(b => b.BorrowDetails)
                     .ThenInclude(d => d.Instance)
-                .Include(x => x.BorrowDetails)
+                .Include(b => b.BorrowDetails)
                     .ThenInclude(d => d.BorrowFines)
+                .Where(x => x.Student.Code == studentCode)
                 .ToListAsync();
         }
 
