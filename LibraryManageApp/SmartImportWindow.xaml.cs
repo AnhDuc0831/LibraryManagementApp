@@ -62,7 +62,7 @@ namespace LibraryManageApp
                     // Convert từ DTO sang ViewModel (để hiển thị trên Grid)
                     _currentBookList = booksDto.Select(b => new BookImportDto
                     {
-                        IsSelected = true, // Mặc định tích chọn hết
+                        IsSelected = false, // Mặc định tích chọn hết
                         Title = b.Title,
                         AuthorName = b.AuthorName,
                         Category = b.Category,

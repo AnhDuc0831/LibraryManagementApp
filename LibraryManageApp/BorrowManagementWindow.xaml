@@ -6,15 +6,12 @@
         xmlns:local="clr-namespace:LibraryManageApp"
         mc:Ignorable="d"
         Title="BorrowManagementWindow" Height="450" Width="800">
-    <Window.Resources>
-        <local:BorrowingOnlyConverter x:Key="BorrowingOnly"/>
-    </Window.Resources>
     
-    <Grid Margin="10">
 
 
     <Window.Resources>
-        <!-- Style cho Button -->
+            <local:BorrowingOnlyConverter x:Key="BorrowingOnly"/>
+            <!-- Style cho Button -->
         <Style x:Key="PrimaryButton" TargetType="Button">
             <Setter Property="Background" Value="#4299E1"/>
             <Setter Property="Foreground" Value="White"/>
@@ -377,4 +374,5 @@
             </Border>
         </Grid>
     </Grid>
+
 </Window>

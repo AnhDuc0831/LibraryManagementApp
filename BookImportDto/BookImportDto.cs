@@ -2,7 +2,7 @@
 {
     public class BookImportDto
     {
-        public bool IsSelected { get; set; } = true; // Mặc định là chọn hết
+        public bool IsSelected { get; set; } = false; // Mặc định là chọn hết
         public string Title { get; set; }
         public string AuthorName { get; set; } // Quan trọng: Tên tác giả (chữ)
         public string AuthorCountry { get; set; }

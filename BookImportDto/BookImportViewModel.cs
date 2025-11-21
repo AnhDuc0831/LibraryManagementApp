@@ -9,7 +9,7 @@ namespace DTO
     public class BookImportViewModel
     {
         // Thuộc tính để Binding vào Checkbox
-        public bool IsSelected { get; set; } = true; // Mặc định chọn hết
+        public bool IsSelected { get; set; } = false; // Mặc định chọn hết
 
         public string Title { get; set; }
         public string AuthorName { get; set; }
