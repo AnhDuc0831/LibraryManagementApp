@@ -106,7 +106,7 @@ namespace Service
                     // BƯỚC 2: INSERT SÁCH (BOOK) VỚI AUTHOR_ID VỪA CÓ
                     string insertBookSql = @"
                 INSERT INTO Book (Title, AuthorID, PublishYear, Quantity, Price, Category)
-                VALUES (@Title, @AuthorID, @Year, 10, @Price, @Category)";
+                VALUES (@Title, @AuthorID, @Year, 0, @Price, @Category)";
                     // Mặc định nhập về 10 cuốn
 
                     using (var cmdBook = new SqlCommand(insertBookSql, conn))
