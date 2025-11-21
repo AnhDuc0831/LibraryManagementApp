@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace LibraryManageApp
 {
@@ -47,11 +48,12 @@ namespace LibraryManageApp
             _borrowService = new BorrowService();
         }
 
-        public async Task Search(int studentId)
+        public async Task Search(string studentId)
         {
             Borrows.Clear();
             foreach (var b in await _borrowService.GetStudentHistoryAsync(studentId))
                 Borrows.Add(b);
+            Console.WriteLine(Borrows.Count);
         }
 
         private void LoadBorrowInfo()

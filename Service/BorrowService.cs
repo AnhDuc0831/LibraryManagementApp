@@ -17,8 +17,8 @@ namespace Service
             _borrowRepo = new BorrowRepository();
         }
 
-        public Task<List<Borrow>> GetStudentHistoryAsync(int studentId)
-            => _borrowRepo.GetByStudentIdAsync(studentId);
+        public Task<List<Borrow>> GetStudentHistoryAsync(string studentCode)
+            => _borrowRepo.GetByStudentIdAsync(studentCode);
 
         public Task UpdateBorrowAsync(Borrow borrow)
             => _borrowRepo.UpdateAsync(borrow);

@@ -8,6 +8,10 @@
         Title="Borrow Management - Library System" Height="700" Width="1400"
         Background="#F0F4F8"
         WindowStartupLocation="CenterScreen">
+        <Window.Resources>
+        <local:BorrowingOnlyConverter x:Key="BorrowingOnly"/>
+    </Window.Resources>
+
 
     <Window.Resources>
         <!-- Style cho Button -->
