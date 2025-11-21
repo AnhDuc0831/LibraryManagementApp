@@ -11,8 +11,8 @@ namespace Service
     {
         private readonly HttpClient httpClient;
         // LƯU Ý: Đây là API Key bạn đã cung cấp. 
-        //private readonly string apiKey = "AIzaSyDf7_Nt-KmhZVzSFDQ1w_jTjWf2lfGg1e8";
-        private readonly string apiKey = "AIzaSyAuJmne4GGbbreuPNkxuRUWa9kOqCc92vg";
+        //private readonly string apiKey = "API_KEY";
+        private readonly string apiKey = "API_KEY";
         
 
         private readonly string apiEndpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent";
