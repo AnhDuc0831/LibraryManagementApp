@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace LibraryManageProgram
+namespace LibraryManageApp
 {
     public class BorrowingOnlyConverter : IValueConverter
     {

@@ -53,11 +53,11 @@
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn Header="Chọn" Binding="{Binding IsSelected}" Width="50"/>
 
-                        <DataGridTextColumn Header="Tên sách" Binding="{Binding Title}" Width="*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Tác giả" Binding="{Binding AuthorName}" Width="150" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Thể loại" Binding="{Binding Category}" Width="100" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Năm" Binding="{Binding PublishYear}" Width="60" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Giá (VNĐ)" Binding="{Binding Price, StringFormat=N0}" Width="100" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Tên sách" Binding="{Binding Title}" Width="*" />
+                        <DataGridTextColumn Header="Tác giả" Binding="{Binding AuthorName}" Width="150"/>
+                        <DataGridTextColumn Header="Thể loại" Binding="{Binding Category}" Width="100" />
+                        <DataGridTextColumn Header="Năm" Binding="{Binding PublishYear}" Width="60" />
+                        <DataGridTextColumn Header="Giá (VNĐ)" Binding="{Binding Price, StringFormat=N0}" Width="100" />
                     </DataGrid.Columns>
 
                     <DataGrid.ColumnHeaderStyle>
