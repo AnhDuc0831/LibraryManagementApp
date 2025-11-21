@@ -20,12 +20,14 @@ namespace LibraryManageApp
         private int _totalPages = 1;
         private int _totalItems = 0;
         private readonly int currentUserId;
+        private readonly Student student;
 
         public StudentWindow(Student student)
         {
             InitializeComponent();
             Loaded += StudentWindow_Loaded;
             this.currentUserId = student.StudentId;
+            this.student = student;
         }
 
         private void StudentWindow_Loaded(object sender, RoutedEventArgs e)
@@ -291,12 +293,6 @@ namespace LibraryManageApp
 
         private async Task LoadHistoryAsync()
         {
-            var code = txtStudentCode?.Text?.Trim();
-            if (string.IsNullOrEmpty(code))
-            {
-                MessageBox.Show("Nhập Student Code.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
 
             lblStudentName.Text = string.Empty;
             dgHistory.ItemsSource = null;
@@ -309,7 +305,7 @@ namespace LibraryManageApp
                              .Include(s => s.Borrows)
                                 .ThenInclude(br => br.Librarian)
                              .AsNoTracking()
-                             .FirstOrDefaultAsync(s => s.Code == code);
+                             .FirstOrDefaultAsync(s => s.Code == this.student.Code);
 
             if (student == null)
             {

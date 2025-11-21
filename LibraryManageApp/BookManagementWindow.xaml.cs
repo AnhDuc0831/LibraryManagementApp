@@ -57,7 +57,12 @@ namespace LibraryManageApp
         private async void EditInstances_Click(object sender, RoutedEventArgs e)
         {
             if (_vm.SelectedBook == null)
+            {
+                MessageBox.Show("Vui lòng chọn sách để edit instance");
                 return;
+
+            }
+
 
             var popup = new BookInstanceWindow(_vm.SelectedBook.BookId, new BookServiceImpl())
             {

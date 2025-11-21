@@ -5,62 +5,372 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryManageApp"
         mc:Ignorable="d"
-        Title="BorrowManagementWindow" Height="450" Width="800">
-    <Grid Margin="10">
+        Title="Borrow Management - Library System" Height="700" Width="1400"
+        Background="#F0F4F8"
+        WindowStartupLocation="CenterScreen">
 
+    <Window.Resources>
+        <!-- Style cho Button -->
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Background" Value="#4299E1"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="20,12"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="6"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#3182CE"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#2C5282"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Style cho TextBox -->
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="#B3D4E5"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#2C5282"/>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="#4299E1"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Style cho DataGrid -->
+        <Style x:Key="ModernDataGrid" TargetType="DataGrid">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#B3D4E5"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="AlternatingRowBackground" Value="#EBF8FF"/>
+            <Setter Property="RowBackground" Value="White"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="RowHeight" Value="45"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+        </Style>
+
+        <Style x:Key="DataGridColumnHeader" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#2C5282"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="BorderThickness" Value="0,0,1,0"/>
+            <Setter Property="BorderBrush" Value="#4299E1"/>
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#BEE3F8"/>
+                    <Setter Property="Foreground" Value="#1A365D"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="DataGridRow">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E6F7FF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Style cho Label -->
+        <Style x:Key="FieldLabel" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#2D3748"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+        </Style>
+
+        <Style x:Key="SectionTitle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#1A365D"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <TextBox x:Name="txtStudentId" Width="120"/>
-            <Button Content="Search" Margin="5 0" Click="Search_Click"/>
-        </StackPanel>
+        <!-- Header -->
+        <Border Grid.Row="0" 
+                Background="#2C5282" 
+                CornerRadius="10,10,0,0" 
+                Padding="25,18" 
+                Margin="0,0,0,20">
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="📋" FontSize="32" Margin="0,0,15,0"/>
+                    <StackPanel>
+                        <TextBlock Text="Borrow Management System" 
+                                  FontSize="26" 
+                                  FontWeight="Bold" 
+                                  Foreground="White"/>
+                        <TextBlock Text="Track and manage book borrowing transactions" 
+                                  FontSize="13" 
+                                  Foreground="#B3D4E5" 
+                                  Margin="0,5,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
 
-        <Grid Grid.Row="1">
+        <!-- Search Section -->
+        <Border Grid.Row="1" 
+                Background="White" 
+                CornerRadius="10" 
+                Padding="20"
+                Margin="0,0,0,20">
+            <Border.Effect>
+                <DropShadowEffect Color="#90CDF4" Opacity="0.3" BlurRadius="15" ShadowDepth="0"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" 
+                           VerticalAlignment="Center" 
+                           Margin="0,0,15,0">
+                    <TextBlock Text="🔍 Tìm kiếm" 
+                              Style="{StaticResource FieldLabel}"
+                              Margin="0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Student ID" Style="{StaticResource FieldLabel}"/>
+                    <TextBox x:Name="txtStudentId" 
+                            Style="{StaticResource ModernTextBox}"
+                            ToolTip="Enter Student ID to search"/>
+                </StackPanel>
+
+                <Button Grid.Column="2"
+                       Content="🔍 Search Student" 
+                       Margin="15,20,0,0" 
+                       Click="Search_Click"
+                       Style="{StaticResource PrimaryButton}"
+                       MinWidth="150"/>
+
+                <Border Grid.Column="3"
+                       Background="#EBF8FF" 
+                       CornerRadius="8" 
+                       Padding="15,10" 
+                       Margin="20,20,0,0"
+                       VerticalAlignment="Bottom">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="💡" FontSize="16" Margin="0,0,8,0"/>
+                        <TextBlock Text="Enter student ID and click Search to view borrow history"
+                                  FontSize="12"
+                                  Foreground="#2C5282"
+                                  TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- Main Content Grid -->
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="1.8*"/>
+                <ColumnDefinition Width="15"/>
+                <ColumnDefinition Width="1.8*"/>
+                <ColumnDefinition Width="15"/>
+                <ColumnDefinition Width="1.4*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Borrow list -->
-            <DataGrid ItemsSource="{Binding Borrows}"
-                      SelectedItem="{Binding SelectedBorrow}"
-                      AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="BorrowId" Binding="{Binding BorrowId}" Width="80"/>
-                    <DataGridTextColumn Header="Date" Binding="{Binding BorrowDate}"/>
-                    <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
-                </DataGrid.Columns>
-            </DataGrid>
+            <!-- Borrow List Section -->
+            <Border Grid.Column="0" 
+                    Background="White" 
+                    CornerRadius="10" 
+                    Padding="20">
+                <Border.Effect>
+                    <DropShadowEffect Color="#90CDF4" Opacity="0.3" BlurRadius="15" ShadowDepth="0"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-            <!-- Detail list -->
-            <DataGrid Grid.Column="1"
-                      ItemsSource="{Binding Details}"
-                      SelectedItem="{Binding SelectedDetail}"
-                      AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="DetailId" Binding="{Binding BorrowDetailId}" Width="80"/>
-                    <DataGridTextColumn Header="Instance" Binding="{Binding InstanceId}" Width="80"/>
-                    <DataGridTextColumn Header="Condition" Binding="{Binding BookInstance.Condition}" Width="100"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                    <Border Grid.Row="0" 
+                            Background="#EBF8FF" 
+                            CornerRadius="8" 
+                            Padding="15,12" 
+                            Margin="0,0,0,15">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📚" FontSize="18" Margin="0,0,10,0"/>
+                                <TextBlock Text="Borrow Records" 
+                                          Style="{StaticResource SectionTitle}"
+                                          Margin="0"/>
+                            </StackPanel>
+                            <Border Background="#4299E1" 
+                                   CornerRadius="15" 
+                                   Padding="10,5"
+                                   HorizontalAlignment="Right">
+                                <TextBlock Text="{Binding Borrows.Count, FallbackValue=0}"
+                                          Foreground="White"
+                                          FontSize="12"
+                                          FontWeight="Bold"/>
+                            </Border>
+                        </Grid>
+                    </Border>
 
-            <!-- Fine list + actions -->
-            <StackPanel Grid.Column="2">
-                <DataGrid ItemsSource="{Binding Fines}" AutoGenerateColumns="False" Height="250">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="FineId" Binding="{Binding FineId}" Width="80"/>
-                        <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="80"/>
-                        <DataGridTextColumn Header="Reason" Binding="{Binding Reason}" Width="150"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                    <DataGrid Grid.Row="1"
+                              ItemsSource="{Binding Borrows}"
+                              SelectedItem="{Binding SelectedBorrow}"
+                              AutoGenerateColumns="False"
+                              Style="{StaticResource ModernDataGrid}"
+                              ColumnHeaderStyle="{StaticResource DataGridColumnHeader}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Borrow ID" Binding="{Binding BorrowId}" Width="100"/>
+                            <DataGridTextColumn Header="Borrow Date" Binding="{Binding BorrowDate, StringFormat=dd/MM/yyyy}" Width="*"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="120"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
 
-                
-            </StackPanel>
+            <!-- Detail List Section -->
+            <Border Grid.Column="2" 
+                    Background="White" 
+                    CornerRadius="10" 
+                    Padding="20">
+                <Border.Effect>
+                    <DropShadowEffect Color="#90CDF4" Opacity="0.3" BlurRadius="15" ShadowDepth="0"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" 
+                            Background="#E6F7FF" 
+                            CornerRadius="8" 
+                            Padding="15,12" 
+                            Margin="0,0,0,15">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📖" FontSize="18" Margin="0,0,10,0"/>
+                                <TextBlock Text="Borrow Details" 
+                                          Style="{StaticResource SectionTitle}"
+                                          Margin="0"/>
+                            </StackPanel>
+                            <Border Background="#38B2AC" 
+                                   CornerRadius="15" 
+                                   Padding="10,5"
+                                   HorizontalAlignment="Right">
+                                <TextBlock Text="{Binding Details.Count, FallbackValue=0}"
+                                          Foreground="White"
+                                          FontSize="12"
+                                          FontWeight="Bold"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <DataGrid Grid.Row="1"
+                              ItemsSource="{Binding Details}"
+                              SelectedItem="{Binding SelectedDetail}"
+                              AutoGenerateColumns="False"
+                              Style="{StaticResource ModernDataGrid}"
+                              ColumnHeaderStyle="{StaticResource DataGridColumnHeader}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Detail ID" Binding="{Binding BorrowDetailId}" Width="100"/>
+                            <DataGridTextColumn Header="Instance ID" Binding="{Binding InstanceId}" Width="110"/>
+                            <DataGridTextColumn Header="Condition" Binding="{Binding BookInstance.Condition}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
+
+            <!-- Fine List Section -->
+            <Border Grid.Column="4" 
+                    Background="White" 
+                    CornerRadius="10" 
+                    Padding="20">
+                <Border.Effect>
+                    <DropShadowEffect Color="#90CDF4" Opacity="0.3" BlurRadius="15" ShadowDepth="0"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" 
+                            Background="#FFF5F5" 
+                            CornerRadius="8" 
+                            Padding="15,12" 
+                            Margin="0,0,0,15">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="💰" FontSize="18" Margin="0,0,10,0"/>
+                                <TextBlock Text="Fines" 
+                                          Style="{StaticResource SectionTitle}"
+                                          Margin="0"
+                                          Foreground="#C53030"/>
+                            </StackPanel>
+                            <Border Background="#E53E3E" 
+                                   CornerRadius="15" 
+                                   Padding="10,5"
+                                   HorizontalAlignment="Right">
+                                <TextBlock Text="{Binding Fines.Count, FallbackValue=0}"
+                                          Foreground="White"
+                                          FontSize="12"
+                                          FontWeight="Bold"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <DataGrid Grid.Row="1"
+                              ItemsSource="{Binding Fines}" 
+                              AutoGenerateColumns="False"
+                              Style="{StaticResource ModernDataGrid}"
+                              ColumnHeaderStyle="{StaticResource DataGridColumnHeader}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Fine ID" Binding="{Binding FineId}" Width="80"/>
+                            <DataGridTextColumn Header="Amount" Binding="{Binding Amount, StringFormat=\{0:N0\} VNĐ}" Width="*"/>
+                            <DataGridTextColumn Header="Reason" Binding="{Binding Reason}" Width="150"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
         </Grid>
-
     </Grid>
 </Window>
